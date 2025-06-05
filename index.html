@@ -1,4 +1,86 @@
-<html>
-  Welcome to this site, 
-  currently under cosntruction
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #cccccc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="email"] {
+      padding: 12px 20px;
+      border-radius: 5px;
+      border: none;
+      width: 300px;
+      max-width: 90%;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #00c6ff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #007bb5;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Coming Soon</h1>
+  <p>We're working on something amazing. Be the first to know when it's live.</p>
+
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
+    <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
+    <button type="submit">Notify Me</button>
+  </form>
+
+  <div class="footer">© 2025 YourWebsite.com</div>
+</body>
 </html>
+
