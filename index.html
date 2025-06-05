@@ -14,7 +14,7 @@
 
     html, body {
       height: 100%;
-      margin: 0;
+      width: 100%;
     }
 
     body {
@@ -23,19 +23,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      position: relative;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
+      background: #000; /* fallback */
     }
 
     body::before {
@@ -68,17 +56,26 @@
       100% { background-position: 0% 50%; }
     }
 
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
     h1 {
-      font-size: 3em;
+      font-size: 2.8em;
       margin-bottom: 15px;
+      word-break: break-word;
     }
 
     .single-line {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 1.2em;
+      font-size: 1.1em;
       margin-bottom: 30px;
+      max-width: 90%;
     }
 
     form {
@@ -87,7 +84,7 @@
       align-items: center;
       gap: 12px;
       width: 100%;
-      max-width: 320px;
+      max-width: 340px;
     }
 
     input[type="email"] {
@@ -107,9 +104,8 @@
       border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.17s ease, transform 0.17s ease;
+      transition: transform 0.2s ease;
       font-weight: 600;
-      margin-top: 5px;
     }
 
     button:hover {
@@ -122,12 +118,11 @@
       color: #000;
       padding: 20px;
       background: transparent;
-      z-index: 1;
     }
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 2.2em;
+        font-size: 2em;
       }
 
       .single-line {
@@ -135,7 +130,11 @@
       }
 
       input[type="email"] {
-        width: 90%;
+        width: 100%;
+      }
+
+      main {
+        padding: 30px 16px;
       }
     }
   </style>
@@ -145,10 +144,12 @@
     <h1>Coming Soon</h1>
     <p class="single-line">We’re working on something magical. Be the first to know when we launch.</p>
 
-    <form action="https://formspree.io/f/xjkrkqby" method="POST">
+    <!-- Replace with FormSubmit or Formspree -->
+    <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
       <input type="email" name="email" placeholder="Enter your email" required />
       <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
       <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
+      <input type="hidden" name="_template" value="table">
       <button type="submit">Notify Me</button>
     </form>
   </main>
