@@ -17,12 +17,13 @@
       color: #ffffff;
       height: 100vh;
       width: 100vw;
+      overflow: hidden;
+      position: relative;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      position: relative;
     }
 
     body::before {
@@ -43,6 +44,10 @@
     }
 
     .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       max-width: 600px;
       width: 100%;
       padding: 20px;
@@ -54,7 +59,10 @@
       margin-bottom: 15px;
     }
 
-    p {
+    .single-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-size: 1.2em;
       margin-bottom: 30px;
     }
@@ -87,6 +95,7 @@
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease;
       font-weight: 600;
+      margin-top:5px;
     }
 
     button:hover {
@@ -94,13 +103,15 @@
     }
 
     .footer {
-      margin-top: auto;
-      padding: 20px 0;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.9em;
       color: #000000;
+      text-align: center;
+      width: max-content;
       z-index: 1;
-      text-align: center; /* Center the text */
-      width: 100%; /* Ensure full width */
     }
 
     @media (max-width: 480px) {
@@ -108,7 +119,7 @@
         font-size: 2.2em;
       }
 
-      p {
+      .single-line {
         font-size: 1em;
       }
 
@@ -121,7 +132,7 @@
 <body>
   <div class="container">
     <h1>Coming Soon</h1>
-    <p>We’re working on something magical. Be the first to know when we launch.</p>
+    <p class="single-line">We’re working on something magical. Be the first to know when we launch.</p>
 
     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" placeholder="Enter your email" required />
