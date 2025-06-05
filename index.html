@@ -123,11 +123,11 @@
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 2em;
+        font-size: 3em;
       }
 
       .single-line {
-        font-size: 1em;
+        font-size: 2em;
       }
 
       input[type="email"] {
@@ -142,15 +142,13 @@
 </head>
 <body>
   <main>
-    <h1><b>Coming Soon<b></b></h1>
-    <p class="single-line"><b><i>We’re working on something magical. Be the first to know when we launch.</i></b></p>
+    <h1>Coming Soon</h1>
+    <p class="single-line">We’re working on something magical. Be the first to know when we launch.</p>
 
-    <!-- Replace with FormSubmit or Formspree -->
-    <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="email" name="email" placeholder="Enter your email" required />
       <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
       <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
-      <input type="hidden" name="_template" value="table">
       <button type="submit">Notify Me</button>
     </form>
   </main>
