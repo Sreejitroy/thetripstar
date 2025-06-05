@@ -6,17 +6,39 @@
   <title>Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       text-align: center;
+      color: #ffffff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 🌈 Animated gradient background */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(270deg, #e0c3fc, #8ec5fc, #fbc2eb, #a1c4fd);
+      background-size: 800% 800%;
+      animation: gradientShift 20s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
@@ -27,7 +49,7 @@
     p {
       font-size: 1.2em;
       margin-bottom: 30px;
-      color: #cccccc;
+      color: #f5f5f5;
     }
 
     form {
@@ -39,48 +61,52 @@
 
     input[type="email"] {
       padding: 12px 20px;
-      border-radius: 5px;
+      border-radius: 8px;
       border: none;
       width: 300px;
       max-width: 90%;
       font-size: 1em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
 
     button {
       padding: 12px 25px;
-      background-color: #00c6ff;
-      color: #fff;
+      background: #ffffff;
+      color: #333;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-weight: 600;
     }
 
     button:hover {
-      background-color: #007bb5;
+      background: #f0f0f0;
+      transform: scale(1.05);
     }
 
     .footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.9em;
-      color: #999;
+      color: #eeeeeeaa;
     }
   </style>
 </head>
 <body>
-  <h1>Coming Soon</h1>
-  <p>We're working on something amazing. Be the first to know when it's live.</p>
+  <div>
+    <h1>Coming Soon</h1>
+    <p>We’re working on something magical. Be the first to know when we launch.</p>
 
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <input type="email" name="email" placeholder="Enter your email" required />
-    <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
-    <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
-    <button type="submit">Notify Me</button>
-  </form>
-
-  <div class="footer">© 2025 Trip Star</div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
+      <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
+      <button type="submit">Notify Me</button>
+    </form>
+    
+    <div class="footer">© 2025 Trip Star (thetripstar.in)</div>
+  </div>
 </body>
 </html>
-
