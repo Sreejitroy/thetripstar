@@ -12,28 +12,46 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       color: #ffffff;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    body::before {
+    /* Beautiful, richer background gradient */
+   body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, #b38fd2, #7ec8e3, #f8a6c4, #a3bce2);
+  background-size: 800% 800%;
+  animation: gradientShift 20s ease infinite;
+  z-index: -2;
+}
+
+
+    /* Optional: soft overlay for better contrast */
+    body::after {
       content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(270deg, #e0c3fc, #8ec5fc, #fbc2eb, #a1c4fd);
-      background-size: 800% 800%;
-      animation: gradientShift 20s ease infinite;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: background: rgba(0, 0, 0, 0.05);
       z-index: -1;
     }
 
@@ -44,14 +62,15 @@
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding: 40px 20px;
+      z-index: 1;
       max-width: 600px;
       width: 100%;
-      padding: 20px;
-      z-index: 1;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     h1 {
@@ -93,9 +112,9 @@
       border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
+      transition: background 0.17s ease, transform 0.2s ease;
       font-weight: 600;
-      margin-top:5px;
+      margin-top: 5px;
     }
 
     button:hover {
@@ -103,15 +122,11 @@
     }
 
     .footer {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
       font-size: 0.9em;
       color: #000000;
       text-align: center;
-      width: max-content;
       z-index: 1;
+      padding-bottom: 20px;
     }
 
     @media (max-width: 480px) {
