@@ -314,33 +314,6 @@ font-weight:bold;
       button.click();
     }
   });
-    // Force lockScreen to always be visible unless password entered right now
-let unlocked = false;
-
-button.addEventListener('click', async () => {
-  const inputHash = await hashPassword(input.value);
-  if (inputHash === PASSWORD_HASH) {
-    unlocked = true;
-    lockScreen.style.display = 'none';
-    siteContent.style.display = 'block';
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'visible';
-    document.documentElement.style.height = 'auto';
-    document.body.style.height = 'auto';
-  } else {
-    alert('Oops! Incorrect password, please try again.');
-    input.value = '';
-    input.focus();
-  }
-});
-
-// Watch if lockScreen is hidden by any means, and force it back if not unlocked
-setInterval(() => {
-  if (!unlocked && lockScreen.style.display === 'none') {
-    lockScreen.style.display = 'flex';
-    siteContent.style.display = 'none';
-  }
-}, 100); // checks every 100 ms
 
 </script>
 
