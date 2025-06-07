@@ -18,7 +18,8 @@ body, html {
     height: 100%;
     margin: 0;
     font-family: 'Poppins', sans-serif;
-  }
+    overflow: hidden;  /* ADD THIS LINE */
+}
   #lockScreen {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -280,9 +281,10 @@ font-weight:bold;
 
   button.addEventListener('click', () => {
     if(input.value === PASSWORD) {
-      lockScreen.style.display = 'none';
-      siteContent.style.display = 'block';
-    } else {
+  lockScreen.style.display = 'none';
+  siteContent.style.display = 'block';
+  document.body.style.overflow = 'auto';  // ADD THIS LINE
+} else {
       alert('Oops! Incorrect password, please try again.');
       input.value = '';
       input.focus();
