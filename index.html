@@ -279,17 +279,17 @@ font-weight:bold;
   const input = document.getElementById('passwordInput');
   const button = document.getElementById('submitBtn');
 
-  button.addEventListener('click', () => {
-    if(input.value === PASSWORD) {
-  lockScreen.style.display = 'none';
-  siteContent.style.display = 'block';
-  document.body.style.overflow = 'auto';  // ADD THIS LINE
-} else {
-      alert('Oops! Incorrect password, please try again.');
-      input.value = '';
-      input.focus();
-    }
-  });
+button.addEventListener('click', () => {
+  if(input.value === PASSWORD) {
+    lockScreen.style.display = 'none';
+    siteContent.style.display = 'block';
+    document.body.style.overflow = 'auto';   
+  } else {
+    alert('Oops! Incorrect password, please try again.');
+    input.value = '';
+    input.focus();
+  }
+});
 
   // Optional: submit on Enter key
   input.addEventListener('keypress', (e) => {
