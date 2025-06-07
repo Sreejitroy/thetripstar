@@ -1,158 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trip Star</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trip Star - Book Flights, Hotels, Trains & More</title>
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+<!----TEMPORARY PASSWORD SECURITY STARTS HERE---->
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  #lockScreen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #f0f8ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 9999;
+  }
+  #lockScreen h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  #lockScreen p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+  }
+  #passwordInput {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    width: 250px;
+    max-width: 90vw;
+    outline: none;
+  }
+  #passwordInput:focus {
+    border-color: #0056b3;
+  }
+  #submitBtn {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #submitBtn:hover {
+    background-color: #0056b3;
+  }
+<!-----PASSWORD PROTECTION STYLE ENDS HERE---->
+
+#mainNavbar .nav-link:hover {
+    color: #000 !important;
+    transition: color 0.3s;
+font-weight:bold;
+}
+#miniNavbar .navbar-nav .nav-link:hover {
+    color: #000 !important;
+    transition: color: 0.3s;
+}
+.destinations .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.destinations .card:hover {
+    transform: scale(1.03); /* slight enlarge */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* nice soft shadow */
+}
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: #007bff !important;
+            display: flex;
+            align-items: center;
+            height: 30px;
+        }
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: url('2.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 55vh;
+            height: auto;
+            padding: 80px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            animation-delay: 0.25s;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            animation-delay: 0.2s;
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Search Tabs */
+        .search-tabs {
+            background-color: white;
+            padding: 27px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+           @media (max-width: 767px) {
+    .search-tabs .form-control {
+        width: 100% !important;
     }
+}
+        }
+        /* Features */
+        .features .feature-box {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .features .feature-box i {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .features .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        /* Destinations */
+        .destinations .card img {
+    height: 200px;  /* Fixed height */
+    object-fit: cover;
+    width: 100%;
+}
 
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: #000; /* fallback */
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(270deg, #b38fd2, #7ec8e3, #f8a6c4, #a3bce2);
-      background-size: 800% 800%;
-      animation: gradientShift 20s ease infinite;
-      z-index: -2;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.05);
-      z-index: -1;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.8em;
-      margin-bottom: 15px;
-      word-break: break-word;
-    }
-
-    .single-line {
-      font-size: 1.1em;
-      margin-bottom: 30px;
-      max-width: 90%;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 340px;
-    }
-
-    input[type="email"] {
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: none;
-      width: 100%;
-      font-size: 1em;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    button {
-      padding: 11px 24px;
-      background: #88E788;
-      color: #333;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #000;
-      padding: 20px;
-      background: transparent;
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2em;
-      }
-
-      .single-line {
-        font-size: 1em;
-      }
-
-      input[type="email"] {
-        width: 100%;
-      }
-
-      main {
-        padding: 30px 16px;
-      }
-    }
-  </style>
+        .destinations h2 {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        /* Footer */
+        .footer {
+            background-color: #222;
+            color: #aaa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .footer .social-icons a {
+            color: #aaa;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #007bff;
+        }
+        .mainNavbar {
+    transition: top 0.3s;
+}
+    </style>
 </head>
+
+
 <body>
-  <main>
-    <h1>Coming Soon</h1>
-    <p class="single-line">We’re working on something magical. Be the first to know when we launch.</p>
+<!-----Starting body of password protection to be removed later---->
+<div id="lockScreen" style="text-align: center; padding: 40px; font-family: Arial, sans-serif;">
+  <h2>🌟 Welcome to Trip Star ! 🌟</h2>
+  <br>
 
-    <form action=https://formspree.io/f/xjkrkqby method="POST">
-      <input type="email" name="email" placeholder="Enter your email" required />
-      <input type="hidden" name="_subject" value="New Subscriber from Coming Soon Page">
-      <input type="hidden" name="_autoresponse" value="Thanks for signing up! We'll notify you when our site goes live.">
-      <button type="submit">Notify Me</button>
-    </form>
-  </main>
+  <!-- First clean line -->
+    <b>We're busy crafting a seamless travel experience just for you — booking flights, trains, hotels, and events all in one place. Our promise? A unique low 2% booking fee so you save more on every trip! Stay tuned — amazing adventures await! 🌍💙</b>
+  </p>
 
-  <footer>© 2025-2026 TRIP STAR (thetripstar.in) ALL RIGHTS RESERVED.</footer>
+
+
+ 
+
+  <!-- Final line -->
+  <h4>
+    Our website is currently in development mode. Please enter the password below to continue.
+  </h4>
+
+  <input type="password" id="passwordInput" placeholder="Enter password" style="margin-top: 10px; padding: 8px 12px; font-size: 1rem; margin-bottom:-10px;" />
+  <br>
+  <button id="submitBtn" style="padding: 10px 20px; font-size: 1rem;">Unlock</button>
+</div>
+
+<!-- Your full site content goes here, but hidden until unlock -->
+<div id="siteContent" style="display:none;">
+  <!-- FULL WEBSITE HTML HERE -->
+</div>
+
+<script>
+  const PASSWORD = "Sreejit123";  // Change this to your chosen password
+  const lockScreen = document.getElementById('lockScreen');
+  const siteContent = document.getElementById('siteContent');
+  const input = document.getElementById('passwordInput');
+  const button = document.getElementById('submitBtn');
+
+  button.addEventListener('click', () => {
+    if(input.value === PASSWORD) {
+      lockScreen.style.display = 'none';
+      siteContent.style.display = 'block';
+    } else {
+      alert('Oops! Incorrect password, please try again.');
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  // Optional: submit on Enter key
+  input.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') {
+      button.click();
+    }
+  });
+</script>
+<!-------ENDING OF PASSWORD SECURITY BODY---->
+
+
+
+
+
+    <!-- Navbar -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="1.jpg" alt="Tripstar Logo" style="height: 50px; margin-right: 10px;"> TRIP STAR
+        </a>
+        
+        <!-- Toggle for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Menu items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <!-- More dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        More
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="contact.html">Contact Us</a></li>
+                        <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mini Navbar (hidden initially) -->
+<nav class="navbar navbar-dark bg-primary fixed-top shadow-sm" id="miniNavbar" style="top: -60px; transition: top 0.3s;">
+    <div class="container d-flex align-items-center position-relative" style="height: 35px;">
+        
+        <!-- Logo absolutely on the left -->
+        <a class="navbar-brand d-flex align-items-center position-absolute start-0 text-white" href="#" style="left: 15px;">
+            <img src="1.jpg" alt="Tripstar Logo" style="height: 30px; margin-right: 8px;">
+        </a>
+
+        <!-- Menu items centered -->
+        <ul class="navbar-nav flex-row mx-auto">
+            <li class="nav-item mx-2"><a class="nav-link text-white" href="#">Flights</a></li>
+            <li class="nav-item mx-2"><a class="nav-link text-white" href="#">Trains</a></li>
+            <li class="nav-item mx-2"><a class="nav-link text-white" href="#">Hotels</a></li>
+            <li class="nav-item mx-2"><a class="nav-link text-white" href="#">Events & Movies</a></li>
+        </ul>
+        
+    </div>
+</nav>
+
+
+
+
+    <!-- Hero section -->
+    <section class="hero">
+        <h1>Plan Your Perfect Trip with Trip Star</h1>
+        <p>Book Flights, Hotels, Trains & Events - All in One Place</p>
+    </section>
+
+    <!-- Search Tabs -->
+    <section class="container search-tabs">
+        <ul class="nav nav-tabs" id="searchTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="flights-tab" data-bs-toggle="tab" data-bs-target="#flights" type="button" role="tab">✈ Flights</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="trains-tab" data-bs-toggle="tab" data-bs-target="#trains" type="button" role="tab">🚆 Trains</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="hotels-tab" data-bs-toggle="tab" data-bs-target="#hotels" type="button" role="tab">🏨 Hotels</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab">🎫 Events</button>
+            </li>
+        </ul>
+        <div class="tab-content mt-3" id="searchTabContent">
+            <!-- Flights -->
+            <div class="tab-pane fade show active" id="flights" role="tabpanel">
+                <form class="row g-3">
+                    <div class="col-md-4"><input type="text" class="form-control" placeholder="From City"></div>
+                    <div class="col-md-4"><input type="text" class="form-control" placeholder="To City"></div>
+                    <div class="col-md-4"><input type="date" class="form-control"></div>
+                    <div class="col-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Search Flights</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Trains -->
+            <div class="tab-pane fade" id="trains" role="tabpanel">
+                <form class="row g-3">
+                    <div class="col-md-4"><input type="text" class="form-control" placeholder="From Station"></div>
+                    <div class="col-md-4"><input type="text" class="form-control" placeholder="To Station"></div>
+                    <div class="col-md-4"><input type="date" class="form-control"></div>
+                    <div class="col-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Search Trains</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Hotels -->
+            <div class="tab-pane fade" id="hotels" role="tabpanel">
+                <form class="row g-3">
+                    <div class="col-md-6"><input type="text" class="form-control" placeholder="City / Destination"></div>
+                    <div class="col-md-3"><input type="date" class="form-control" placeholder="Check-in"></div>
+                    <div class="col-md-3"><input type="date" class="form-control" placeholder="Check-out"></div>
+                    <div class="col-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Search Hotels</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Events -->
+            <div class="tab-pane fade" id="events" role="tabpanel">
+                <form class="row g-3">
+                    <div class="col-md-6"><input type="text" class="form-control" placeholder="Event / Concert Name"></div>
+                    <div class="col-md-6"><input type="text" class="form-control" placeholder="City"></div>
+                    <div class="col-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Search Events</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features container text-center mt-5" data-aos="fade-up">
+        <div class="row">
+            <div class="col-md-3 feature-box">
+                <i class="fas fa-tags"></i>
+                <h5>Best Price Guarantee</h5>
+            </div>
+            <div class="col-md-3 feature-box">
+                <i class="fas fa-headset"></i>
+                <h5>24/7 Customer Support</h5>
+            </div>
+            <div class="col-md-3 feature-box">
+                <i class="fas fa-shield-alt"></i>
+                <h5>Secure Payments</h5>
+            </div>
+            <div class="col-md-3 feature-box">
+                <i class="fas fa-thumbs-up"></i>
+                <h5>Trusted by Millions</h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Destinations -->
+    <section class="destinations container mt-5" data-aos="fade-up">
+        <h2 class="text-center">Top Destinations</h2>
+        <div class="row">
+            <div class="col-md-3">
+    <a href="paris.html" class="card destination-card text-decoration-none text-dark">
+        <img src="paris.jpg" class="card-img-top" alt="Paris">
+        <div class="card-body text-center">
+            <h5 class="card-title">~ Paris ~</h5>
+        </div>
+    </a>
+</div>
+
+            <div class="col-md-3">
+    <a href="newyork.html" class="card destination-card text-decoration-none text-dark">
+        <img src="new.jpg" class="card-img-top" alt="Paris">
+        <div class="card-body text-center">
+            <h5 class="card-title">~ New York ~</h5>
+        </div>
+    </a>
+</div>
+            <div class="col-md-3">
+    <a href="dubai.html" class="card destination-card text-decoration-none text-dark">
+        <img src="dubai2.jpg" class="card-img-top" alt="Paris">
+        <div class="card-body text-center">
+            <h5 class="card-title">~ Dubai ~</h5>
+        </div>
+    </a>
+</div>
+            <div class="col-md-3">
+    <a href="tokyo.html" class="card destination-card text-decoration-none text-dark">
+        <img src="images.jpg" class="card-img-top" alt="Paris">
+        <div class="card-body text-center">
+            <h5 class="card-title">~ Tokyo ~</h5>
+        </div>
+    </a>
+</div>
+    </section>
+
+<!-- Why Choose Us -->
+<section class="container mt-5" data-aos="fade-up">
+    <h2 class="text-center mb-4">Why Choose Us</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card text-center p-4 h-100 shadow-sm">
+                <i class="fas fa-percent fa-3x text-primary mb-3"></i>
+                <h5>Only 2% on Booking Fees</h5>
+                <p>We keep our commission lowest so you can save more on your bookings.</p>
+                <p1><b>No Hidden Charges !</b></p1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center p-4 h-100 shadow-sm">
+                <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                <h5>Global Coverage</h5>
+                <p>Book flights, trains, hotels, and events worldwide with ease.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center p-4 h-100 shadow-sm">
+                <i class="fas fa-star fa-3x text-primary mb-3"></i>
+                <h5>Top Rated Service</h5>
+                <p>Trusted by millions of happy travelers around the world.</p>
+            </div>
+        </div>
+<!-- Testimonials -->
+<section class="container mt-5" data-aos="fade-up">
+    <h2 class="text-center mb-4">What Our Customers Say</h2>
+    <div class="row g-4">
+        <!-- Testimonial 1 -->
+        <div class="col-md-4">
+            <div class="card p-4 h-100 shadow-sm text-center">
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="https://i.pravatar.cc/150?img=47" class="rounded-circle border border-3 border-primary shadow" alt="Customer 1" width="100" height="100">
+                </div>
+                <p>"Booking my entire trip on Trip Star was so simple. Love the 1% fee — super affordable!"</p>
+                <h6 class="mt-3 mb-0">Casey</h6>
+            </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="col-md-4">
+            <div class="card p-4 h-100 shadow-sm text-center">
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="https://i.pravatar.cc/150?img=12" class="rounded-circle border border-3 border-primary shadow" alt="Customer 2" width="100" height="100">
+                </div>
+                <p>"Very professional service and excellent prices. I always recommend Trip Star to my friends."</p>
+                <h6 class="mt-3 mb-0">Rohit S.</h6>
+            </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="col-md-4">
+            <div class="card p-4 h-100 shadow-sm text-center">
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="https://i.pravatar.cc/150?img=32" class="rounded-circle border border-3 border-primary shadow" alt="Customer 3" width="100" height="100">
+                </div>
+                <p>"I was able to book flights and hotels at the best rates. Smooth experience, highly recommended."</p>
+                <h6 class="mt-3 mb-0">Neha R.</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 TRIP STAR™. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+<script>
+    let lastScrollTop = 0;
+    const mainNavbar = document.getElementById("mainNavbar");
+    const miniNavbar = document.getElementById("miniNavbar");
+
+    window.addEventListener("scroll", function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down → hide main navbar, show mini navbar
+            mainNavbar.style.top = "-80px";
+            miniNavbar.style.top = "0";
+        } else {
+            // Scrolling up → show main navbar, hide mini navbar
+            mainNavbar.style.top = "0";
+            miniNavbar.style.top = "-60px";
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+</script>
 </body>
 </html>
