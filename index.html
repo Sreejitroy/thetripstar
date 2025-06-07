@@ -274,21 +274,35 @@ font-weight:bold;
 </div>
 
 <script>
-  const PASSWORD = "Sreejit123";  // Change this to your chosen password
-  const lockScreen = document.getElementById('lockScreen');
-  const siteContent = document.getElementById('siteContent');
-  const input = document.getElementById('passwordInput');
-  const button = document.getElementById('submitBtn');
+  // SHA-256 hash of your password
+const PASSWORD_HASH = 'e344558b8357c8976caf13f74ab12b6ea21908499ffac7b010f4d7999c8f12e6';  // Pre-computed hash of "Sreejit123"
 
-button.addEventListener('click', () => {
-  if(input.value === PASSWORD) {
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+button.addEventListener('click', async () => {
+  const inputHash = await hashPassword(input.value);
+  if(inputHash === PASSWORD_HASH) {
     lockScreen.style.display = 'none';
     siteContent.style.display = 'block';
-    document.body.style.overflow = 'visible';
+
     document.documentElement.style.overflow = 'auto';
-    document.body.style.height = 'auto';
+    document.body.style.overflow = 'visible';
     document.documentElement.style.height = 'auto';
-} 
+    document.body.style.height = 'auto';
+  } else {
+    alert('Oops! Incorrect password, please try again.');
+    input.value = '';
+    input.focus();
+  }
+});
+ 
   else {
     alert('Oops! Incorrect password, please try again.');
     input.value = '';
