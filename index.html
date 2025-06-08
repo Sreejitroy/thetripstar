@@ -95,9 +95,9 @@ body, html {
 <!-----PASSWORD PROTECTION STYLE ENDS HERE---->
 
 #mainNavbar .nav-link:hover {
-    color: #000 !important;
+    color: #000000;
     transition: color 0.3s;
-font-weight:bold;
+    font-weight:bold;
 }
 #miniNavbar .navbar-nav .nav-link:hover {
     color: #000 !important;
@@ -242,21 +242,20 @@ font-weight:bold;
     transition: top 0.3s;
 }
         .scroll-indicator {
-    margin-top: 7px;
+    /* Start visible by default (remove display:none here) */
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
     left: 50%;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%);
     font-size: 1.2rem;
-    color: #007bff;
+    color: #000000;
     text-shadow: 0 0 10px #fff, 0 0 10px #007bff;
     cursor: pointer;
-    animation: twinkle 2.5s infinite;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.6s ease;
     opacity: 1;
     pointer-events: auto;
     user-select: none;
-    z-index: 9999;  /* Ensure it’s above other content */
+    z-index: 9999;
 }
 
 @keyframes twinkle {
@@ -265,12 +264,25 @@ font-weight:bold;
     100% { opacity: 1; }
 }
 
+/* Animate only when .animate class is present */
+.scroll-indicator.animate {
+    animation: twinkle 2.5s infinite;
+}
+
+/* Hide and stop animation */
 .scroll-indicator.hidden {
     opacity: 0;
+    animation: none;
     pointer-events: none;
-    transform: translateX(-50%) translateY(-40px); /* slide up and fade */
-    animation-play-state: paused;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -307,6 +319,8 @@ font-weight:bold;
   <!-- FULL WEBSITE HTML HERE -->
 </div>
 
+
+
 <script>
   // SHA-256 hash of your password
   const PASSWORD_HASH = 'e344558b8357c8976caf13f74ab12b6ea21908499ffac7b010f4d7999c8f12e6'; 
@@ -327,19 +341,21 @@ font-weight:bold;
 
   button.addEventListener('click', async () => {
     const inputHash = await hashPassword(input.value);
-    if(inputHash === PASSWORD_HASH) {
-      lockScreen.style.display = 'none';
-      siteContent.style.display = 'block';
+    if (inputHash === PASSWORD_HASH) {
+    lockScreen.style.display = 'none';
+    siteContent.style.display = 'block';
 
-      document.documentElement.style.overflow = 'auto';
-      document.body.style.overflow = 'visible';
-      document.documentElement.style.height = 'auto';
-      document.body.style.height = 'auto';
-    } else {
-      alert('Oops! Incorrect password, please try again.');
-      input.value = '';
-      input.focus();
-    }
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'visible';
+    document.documentElement.style.height = 'auto';
+    document.body.style.height = 'auto';
+
+    // Now show scroll indicator properly
+    const indicator = document.getElementById('scrollIndicator');
+    indicator.style.display = 'block';
+    indicator.classList.remove('hidden');
+}
+
   });
 
   // Optional: submit on Enter key
@@ -348,8 +364,8 @@ font-weight:bold;
       button.click();
     }
   });
-
 </script>
+
 
 
 
@@ -484,7 +500,7 @@ font-weight:bold;
         </div>
     </section>
 <!-- Scroll down indicator -->
-<div id="scrollIndicator" class="scroll-indicator">
+<div id="scrollIndicator" class="scroll-indicator hidden">
     ↓ Scroll Down To Discover More ! ↓
 </div>
 
@@ -660,12 +676,81 @@ font-weight:bold;
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
 </script>
-        <script>
-window.addEventListener('scroll', function() {
-    const indicator = document.getElementById('scrollIndicator');
-    if (window.scrollY > 50) { // adjust this threshold if needed
-        indicator.classList.add('hidden');
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const indicator = document.getElementById('scrollIndicator');
+  const lockScreen = document.getElementById('lockScreen');
+
+  // Make this function accessible globally (optional: attach to window)
+  window.updateIndicator = function() {
+    if (lockScreen && lockScreen.style.display !== 'none') {
+      indicator.style.display = 'none';
+      indicator.classList.remove('animate');
+      indicator.classList.add('hidden');
+      return;
     }
+
+    if (window.scrollY === 0) {
+      indicator.style.display = 'block';
+      indicator.classList.remove('hidden');
+      indicator.classList.add('animate');
+    } else {
+      indicator.classList.remove('animate');
+      indicator.classList.add('hidden');
+      setTimeout(() => {
+        if (window.scrollY !== 0) {
+          indicator.style.display = 'none';
+        }
+      }, 600);
+    }
+  };
+
+  // Initial check on page load
+  updateIndicator();
+
+  // Listen for scroll events
+  window.addEventListener('scroll', updateIndicator);
+
+  // Your password unlock logic here
+  const siteContent = document.getElementById('siteContent');
+  const input = document.getElementById('passwordInput');
+  const button = document.getElementById('submitBtn');
+  const PASSWORD_HASH = 'e344558b8357c8976caf13f74ab12b6ea21908499ffac7b010f4d7999c8f12e6';
+
+  async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+  }
+
+  button.addEventListener('click', async () => {
+    const inputHash = await hashPassword(input.value);
+    if (inputHash === PASSWORD_HASH) {
+      lockScreen.style.display = 'none';
+      siteContent.style.display = 'block';
+
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.overflow = 'visible';
+      document.documentElement.style.height = 'auto';
+      document.body.style.height = 'auto';
+
+      // Show the scroll indicator container and call updateIndicator
+      indicator.style.display = 'block';
+
+      // Call updateIndicator explicitly after unlock to start animation
+      updateIndicator();
+    }
+  });
+
+  // Optional: submit on Enter key
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      button.click();
+    }
+  });
 });
 </script>
 
