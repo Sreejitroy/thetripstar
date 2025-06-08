@@ -188,12 +188,13 @@ font-weight:bold;
             margin-top: -68px;
             position: relative;
             z-index: 10;
-           @media (max-width: 790px) {
+           
+        }
+        @media (max-width: 785px) {
     .search-tabs .form-control {
         width: 100% !important;
     }
 }
-        }
         /* Features */
         .features .feature-box {
             text-align: center;
@@ -247,14 +248,14 @@ font-weight:bold;
     font-size: 1.2rem;
     color: #007bff;
     text-shadow: 0 0 10px #fff, 0 0 10px #007bff;
-    animation: twinkle 2.5s infinite;
+    animation: twinkle 2s infinite;
     cursor: pointer;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.7s ease;
 }
 
 @keyframes twinkle {
     0% { opacity: 1; }
-    50% { opacity: 0.3; }
+    50% { opacity: 0.1; }
     100% { opacity: 1; }
 }
 
