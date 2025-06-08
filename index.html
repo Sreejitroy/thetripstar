@@ -592,8 +592,15 @@ font-weight:bold;
     <!-- AOS Animation JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
-    </script>
+    AOS.init({
+        duration: 800,   // animation runs for 0.8s (fast and smooth)
+        offset: 80,      // show sections sooner (you scroll less)
+        easing: 'ease-in-out',  // smoother feel
+        once: true,      // animate only once (improves performance)
+        mirror: false    // do not animate again when scrolling back up
+    });
+</script>
+
 <script>
     let lastScrollTop = 0;
     const mainNavbar = document.getElementById("mainNavbar");
