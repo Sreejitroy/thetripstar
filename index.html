@@ -242,27 +242,35 @@ font-weight:bold;
     transition: top 0.3s;
 }
         .scroll-indicator {
-    position: relative;
-    text-align: center;
     margin-top: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
     font-size: 1.2rem;
     color: #007bff;
     text-shadow: 0 0 10px #fff, 0 0 10px #007bff;
-    animation: twinkle 2s infinite;
     cursor: pointer;
-    transition: opacity 0.7s ease;
+    animation: twinkle 2.5s infinite;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    pointer-events: auto;
+    user-select: none;
 }
 
 @keyframes twinkle {
     0% { opacity: 1; }
-    50% { opacity: 0.1; }
+    50% { opacity: 0.5; }
     100% { opacity: 1; }
 }
 
 .scroll-indicator.hidden {
     opacity: 0;
     pointer-events: none;
+    transform: translateX(-50%) translateY(-40px); /* slide up */
+    animation-play-state: paused;
 }
+
 
     </style>
 </head>
