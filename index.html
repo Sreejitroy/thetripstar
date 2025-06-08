@@ -240,6 +240,29 @@ font-weight:bold;
         .mainNavbar {
     transition: top 0.3s;
 }
+        .scroll-indicator {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #007bff;
+    text-shadow: 0 0 10px #fff, 0 0 10px #007bff;
+    animation: twinkle 1s infinite;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes twinkle {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
     </style>
 </head>
 
@@ -449,6 +472,10 @@ font-weight:bold;
             </div>
         </div>
     </section>
+<!-- Scroll down indicator -->
+<div id="scrollIndicator" class="scroll-indicator">
+    ↓ Scroll Down ↓
+</div>
 
     <!-- Features Section -->
     <section class="features container text-center mt-5" data-aos="fade-up" data-aos-duration="350">
@@ -622,5 +649,14 @@ font-weight:bold;
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
 </script>
+        <script>
+window.addEventListener('scroll', function() {
+    const indicator = document.getElementById('scrollIndicator');
+    if (window.scrollY > 50) { // adjust this threshold if needed
+        indicator.classList.add('hidden');
+    }
+});
+</script>
+
 </body>
 </html>
