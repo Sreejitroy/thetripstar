@@ -242,7 +242,7 @@ font-weight:bold;
     transition: top 0.3s;
 }
         .scroll-indicator {
-    margin-top: 10px;
+    margin-top: 7px;
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -256,20 +256,22 @@ font-weight:bold;
     opacity: 1;
     pointer-events: auto;
     user-select: none;
+    z-index: 9999;  /* Ensure it’s above other content */
 }
 
 @keyframes twinkle {
     0% { opacity: 1; }
-    50% { opacity: 0.5; }
+    50% { opacity: 0; }
     100% { opacity: 1; }
 }
 
 .scroll-indicator.hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%) translateY(-40px); /* slide up */
+    transform: translateX(-50%) translateY(-40px); /* slide up and fade */
     animation-play-state: paused;
 }
+
 
 
     </style>
